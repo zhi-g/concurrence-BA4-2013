@@ -1,5 +1,10 @@
 package tcp;
 
-public class Worker {
+public class Worker implements Runnable {
+
+	@Override
+	public void run() {
+		
+	}
 
 }
