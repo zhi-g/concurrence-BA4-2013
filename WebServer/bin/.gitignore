@@ -1,2 +1,4 @@
 /main
 /tcp
+#Compiled files#
+*.class
