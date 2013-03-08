@@ -1,4 +1,6 @@
 package tcp;
+
+import java.net.ServerSocket;
 /**
  * 
  * @author Zhivka Gucevska, Valentin Rutz
