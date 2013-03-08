@@ -1,0 +1,104 @@
+<project name="WebServer" default="compile" basedir=".">
+	<!-- Change these to your liking -->
+	<property name="sources" location="${basedir}/src" />
+	<property name="build" location="${basedir}/bin" />
+	<property name="javadoc" location="${basedir}/site/javadoc" />
+	<property name="library-path" location="${basedir}/lib" />
+
+	<path id="default.classpath">
+		<pathelement path="${build}" />
+		<pathelement location="${library-path}/webserver-provided.jar" />
+	</path>
+
+	<target name="clean">
+		<delete dir="${build}" />
+		<delete dir="${javadoc}" />
+	</target>
+
+	<target name="compile" description="Builds everything the project">
+		<mkdir dir="${build}" />
+		<javac srcdir="${sources}" destdir="${build}" debug="on" debuglevel="lines,vars,source" includeantruntime="false" classpath="${library-path}/webserver-provided.jar">
+			<!--classpath refid="default.classpath">
+		</classpath-->
+		</javac>
+	</target>
+
+
+	<target name="run" description="Starts the server " depends="compile">
+		<java classname="lsr.concurrence.webserver.impl.Main">
+			<!-- Replace with command line arguments, if any -->
+			<arg value="" />
+			<classpath refid="default.classpath" />
+		</java>
+	</target>
+
+
+	<!-- Arguments for the JVM used to launch the programs below. 
+		Use the given configuration file for the logging. -->
+	<property name="jvm-args" value="-Djava.util.logging.config.file=logging.properties -ea" />
+
+
+	<!-- must fork JVM in order to use jvmarg. If the program is launched on the 
+	 same JVM used by ant, the jvmarg is ignored -->
+	<target name="run-stage1" description="Starts the server for stage 1" depends="compile">
+		<!-- Replace with your main class for stage1 (submitting a working stage1 is optional) -->
+		<java classname="lsr.concurrence.webserver.stage1.Main" fork="true">
+			<classpath refid="default.classpath" />
+			<jvmarg line="${jvm-args}" />
+			<arg line="" />
+		</java>
+	</target>
+
+	<target name="run-stage2" description="Starts the server for stage 2" depends="compile">
+		<!-- Replace with your main class for stage2 -->
+		<java classname="lsr.concurrence.webserver.stage2.Main" fork="true">
+			<classpath refid="default.classpath" />
+			<jvmarg line="${jvm-args}" />
+			<arg line="" />
+		</java>
+	</target>
+
+	<target name="run-stage3" description="Starts the server for stage 3" depends="compile">
+		<!-- Replace with your main class for stage3 -->
+		<java classname="lsr.concurrence.webserver.stage3.Main" fork="true">
+			<classpath refid="default.classpath" />
+			<jvmarg line="${jvm-args}" />
+			<arg line="" />
+		</java>
+	</target>
+
+	<target name="run-load-tester" description="Starts the load tester client" depends="compile">
+		<java classname="lsr.concurrence.client.Client" fork="true">
+			<classpath>
+				<path refid="default.classpath" />
+				<pathelement location="lib/commons-math-2.2.jar" />
+			</classpath>
+			<jvmarg line="${jvm-args}" />
+			<arg line="4 2" />
+		</java>
+	</target>
+
+	<target name="javadoc" description="Create Javadocs">		
+		<delete dir="${javadoc}"/>
+		<mkdir dir="${javadoc}"/>
+		<javadoc destdir="${javadoc}" sourcepath="${sources}" />
+	</target>
+
+	<!-- This should produce what is required for submission, as of now. Check before submitting, YMMV otherwise. -->
+	<target name="prepare-submission" description="Attempts to collect everything required for submission into a zip file. NOTE: it's not named correctly!" depends="readme.txt">
+		<delete file="submission.zip" />
+		<zip destfile="submission.zip">
+			<zipfileset dir="${basedir}/lib/" includes="*.jar" prefix="lib/" />
+			<zipfileset dir="${basedir}/site/" includes="**" prefix="site/" />
+			<zipfileset dir="${basedir}" includes="*.properties build.xml" />
+			<zipfileset dir="${basedir}/src" includes="**" prefix="src/" />
+			<zipfileset dir="${basedir}/" file="readme.txt" />
+		</zip>
+	</target>
+
+	<target name="readme.txt">
+		<available file="readme.txt" property="have.readme.txt" />
+		<fail unless="have.readme.txt" message="readme.txt is missing" />
+	</target>
+
+</project>
