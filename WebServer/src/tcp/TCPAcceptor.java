@@ -8,6 +8,6 @@ package tcp;
  */
 public class TCPAcceptor {
 	
-	private static TCPAcceptor instance= null;
+private static TCPAcceptor instance= null;
 
 }
