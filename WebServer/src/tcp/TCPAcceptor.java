@@ -1,7 +1,7 @@
 package tcp;
 
 import java.io.IOException;
-import java.net.ServerSocket;
+import java.net.*;
 
 /**
  * 
@@ -12,7 +12,7 @@ import java.net.ServerSocket;
  */
 
 public class TCPAcceptor extends Thread {
-	public final int PORT = 8080;
+	public final int PORT = 8888;
 	private static TCPAcceptor instance = null;
 	private ServerSocket serverSocket = null;
 	
@@ -34,7 +34,8 @@ public class TCPAcceptor extends Thread {
 	public void run() {
 		while(true) {
 			try {
-				serverSocket.accept();
+				Socket clientSocket = serverSocket.accept();
+				new Thread(new Worker(clientSocket)).start();
 			} catch (IOException e) {
 				System.out.println("Server crashed listening to port: " + PORT);
 			}
