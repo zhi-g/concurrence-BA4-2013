@@ -1,6 +1,8 @@
 package tcp;
 
+import java.io.IOException;
 import java.net.ServerSocket;
+
 /**
  * 
  * @author Zhivka Gucevska, Valentin Rutz
