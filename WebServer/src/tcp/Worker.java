@@ -51,7 +51,6 @@ public class Worker implements Runnable {
 				} catch (IOException e) {
 					openedConnection =  false;
 				} catch (URISyntaxException e) {
-					// TODO Auto-generated catch block
 					System.err.println("Mauvaise URI pour accéder aux fichiers!");
 					e.printStackTrace();
 				}

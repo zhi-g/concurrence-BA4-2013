@@ -15,6 +15,7 @@ public class TCPAcceptor extends Thread {
 	public final int PORT = 8888;
 	private static TCPAcceptor instance = null;
 	private ServerSocket serverSocket = null;
+	private TasksBuffer tasks;
 	
 	private TCPAcceptor() {
 		try {
@@ -22,6 +23,7 @@ public class TCPAcceptor extends Thread {
 		} catch (IOException e) {
 			System.out.println("Server could not connect to port: " + PORT);
 		}
+		tasks = new TasksBuffer();
 	}
 
 	public static TCPAcceptor getInstance() {
@@ -35,7 +37,7 @@ public class TCPAcceptor extends Thread {
 		while(true) {
 			try {
 				Socket clientSocket = serverSocket.accept();
-				new Thread(new Worker(clientSocket)).start();
+				tasks.addWorker(new Worker(clientSocket));
 			} catch (IOException e) {
 				System.out.println("Server crashed listening to port: " + PORT);
 			}
