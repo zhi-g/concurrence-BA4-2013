@@ -42,7 +42,7 @@
 	 same JVM used by ant, the jvmarg is ignored -->
 	<target name="run-stage1" description="Starts the server for stage 1" depends="compile">
 		<!-- Replace with your main class for stage1 (submitting a working stage1 is optional) -->
-		<java classname="${basedir}.src.main.Main" fork="true">
+		<java classname="lsr.concurrence.webserver.stage1.Main" fork="true">
 			<classpath refid="default.classpath" />
 			<jvmarg line="${jvm-args}" />
 			<arg line="" />
