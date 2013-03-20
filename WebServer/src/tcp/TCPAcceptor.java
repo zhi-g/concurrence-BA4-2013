@@ -3,6 +3,8 @@ package tcp;
 import java.io.IOException;
 import java.net.*;
 
+import lsr.concurrence.webserver.Configuration;
+
 /**
  * 
  * @author Zhivka Gucevska, Valentin Rutz
@@ -12,7 +14,7 @@ import java.net.*;
  */
 
 public class TCPAcceptor extends Thread {
-	public final int PORT = 8888;
+	public final int PORT = Configuration.config.getIntProperty("server.port", Configuration.DEFAULT_SERVER_PORT);
 	private static TCPAcceptor instance = null;
 	private ServerSocket serverSocket = null;
 	private TasksBuffer tasks;

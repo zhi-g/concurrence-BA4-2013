@@ -49,6 +49,7 @@ public class Worker implements Runnable {
 					response = site.respondTo(request);
 					response.writeTo(httpOutput);
 				} catch (IOException e) {
+					System.out.println("Interruption Thread: "+ Thread.currentThread().getName());
 					openedConnection =  false;
 				} catch (URISyntaxException e) {
 					System.err.println("Mauvaise URI pour accéder aux fichiers!");

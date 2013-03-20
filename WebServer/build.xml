@@ -42,7 +42,7 @@
 	 same JVM used by ant, the jvmarg is ignored -->
 	<target name="run-stage1" description="Starts the server for stage 1" depends="compile">
 		<!-- Replace with your main class for stage1 (submitting a working stage1 is optional) -->
-		<java classname="lsr.concurrence.webserver.stage1.Main" fork="true">
+		<java classname="main.Main" fork="true">
 			<classpath refid="default.classpath" />
 			<jvmarg line="${jvm-args}" />
 			<arg line="" />
@@ -51,7 +51,7 @@
 
 	<target name="run-stage2" description="Starts the server for stage 2" depends="compile">
 		<!-- Replace with your main class for stage2 -->
-		<java classname="lsr.concurrence.webserver.stage2.Main" fork="true">
+		<java classname="main.Main" fork="true">
 			<classpath refid="default.classpath" />
 			<jvmarg line="${jvm-args}" />
 			<arg line="" />
@@ -60,7 +60,7 @@
 
 	<target name="run-stage3" description="Starts the server for stage 3" depends="compile">
 		<!-- Replace with your main class for stage3 -->
-		<java classname="lsr.concurrence.webserver.stage3.Main" fork="true">
+		<java classname="main.Main" fork="true">
 			<classpath refid="default.classpath" />
 			<jvmarg line="${jvm-args}" />
 			<arg line="" />
