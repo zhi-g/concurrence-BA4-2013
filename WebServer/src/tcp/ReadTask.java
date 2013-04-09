@@ -23,16 +23,13 @@ public class ReadTask extends Task {
 
     @Override
     public void run() {
+	openedConnection = true;
 	try {
 	    httpInput = new HttpRequestStream(clientSocket.getInputStream());
 	} catch (IOException e) {
-	    // TODO: comment gérer cette exception??
-	    System.err
-		    .println("Impossible de récupérer les flux de la socket!");
-	    e.printStackTrace();
+		openedConnection = false;
 	}
 
-	openedConnection = true;
 	try {
 	    while (openedConnection) {
 		try {

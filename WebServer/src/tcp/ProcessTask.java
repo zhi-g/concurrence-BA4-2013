@@ -40,10 +40,7 @@ public class ProcessTask extends Task {
 	    System.out.println("Response" + ID + " sent for socket "+ clientSocket.toString());
 	    counter.increment();
 	} catch (IOException e) {
-	    // TODO: comment gérer cette exception??
-	    System.err
-		    .println("Impossible de récupérer les flux de la socket!");
-	    e.printStackTrace();
+	    
 	} catch (URISyntaxException e) {
 	    e.printStackTrace();
 	}
