@@ -51,7 +51,7 @@
 
 	<target name="run-stage2" description="Starts the server for stage 2" depends="compile">
 		<!-- Replace with your main class for stage2 -->
-		<java classname="main.Main" fork="true">
+		<java classname="main.Main_stage2" fork="true">
 			<classpath refid="default.classpath" />
 			<jvmarg line="${jvm-args}" />
 			<arg line="" />
@@ -60,7 +60,7 @@
 
 	<target name="run-stage3" description="Starts the server for stage 3" depends="compile">
 		<!-- Replace with your main class for stage3 -->
-		<java classname="main.Main" fork="true">
+		<java classname="main.Main_stage3" fork="true">
 			<classpath refid="default.classpath" />
 			<jvmarg line="${jvm-args}" />
 			<arg line="" />

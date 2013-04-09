@@ -7,16 +7,16 @@ import lsr.concurrence.webserver.Configuration;
 public class TasksBuffer {
 	final int THREAD_POOL_SIZE = Configuration.config.getIntProperty("thread_pool_size", 2);
 	final int BUFFER_SIZE = 7;
-	private Worker[] buffer;
+	private Task[] buffer;
 	private int input = 0;
 	private int output = 0;
-	private TaskConsumer[] consumers;
+	private Worker[] consumers;
 	private Semaphore emptyBuffer;
 	private Semaphore fullBuffer;
 
 	TasksBuffer() {
-		buffer = new Worker[BUFFER_SIZE];
-		consumers = new TaskConsumer[THREAD_POOL_SIZE];
+		buffer = new Task[BUFFER_SIZE];
+		consumers = new Worker[THREAD_POOL_SIZE];
 		emptyBuffer = new Semaphore(BUFFER_SIZE);
 		fullBuffer = new Semaphore(BUFFER_SIZE);
 		emptyBuffer.drainPermits();
@@ -25,12 +25,12 @@ public class TasksBuffer {
 
 	private void startConsumers() {
 		for (int i = 0; i < THREAD_POOL_SIZE; ++i) {
-			consumers[i] = new TaskConsumer(this);
+			consumers[i] = new Worker(this);
 			consumers[i].start();
 		}
 	}
 
-	void addWorker(Worker task) {
+	void addTask(Task task) {
 		System.out.println("addWorker:"+ Thread.currentThread().getName());
 		try {
 			fullBuffer.acquire();
@@ -42,7 +42,7 @@ public class TasksBuffer {
 		emptyBuffer.release();
 	}
 
-	Worker retrieveWorker() {
+	Task retrieveTask() {
 		System.out.println("retrieveWorker before acquire:"+ Thread.currentThread().getName());
 		try {
 			emptyBuffer.acquire();
@@ -50,10 +50,10 @@ public class TasksBuffer {
 			e.printStackTrace();
 		}
 		System.out.println("retrieveWorker after acquire:"+ Thread.currentThread().getName());
-		Worker worker = buffer[output];
+		Task task = buffer[output];
 		buffer[output] = null;
 		output = (output + 1)%BUFFER_SIZE;
 		fullBuffer.release();
-		return worker;
+		return task;
 	}
 }

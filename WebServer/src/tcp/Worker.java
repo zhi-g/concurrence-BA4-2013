@@ -1,66 +1,30 @@
 package tcp;
 
-import java.io.IOException;
-import java.net.*;
-import java.io.*;
+import java.util.concurrent.Semaphore;
 
-import lsr.concurrence.http.*;
-import lsr.concurrence.webserver.*;
+public class Worker extends Thread {
+	private static boolean stayingAlive = true;
+	private TasksBuffer tasks;
+	private static Semaphore nbConsumers = new Semaphore(1);
 
-public class Worker implements Runnable {
-
-	private Socket clientSocket;
-	private HttpRequestStream httpInput;
-	private HttpRequest request;
-	private HttpResponse response;
-	private OutputStream httpOutput;
-	private StaticSite site;
-	private boolean openedConnection;
-
-	public Worker(Socket clientSocket) {
-		this.clientSocket = clientSocket;
-		try {
-			site = new StaticSite();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.err.println("Impossible d'accéder aux fichiers du serveur");
-			e.printStackTrace();
-		}
+	public Worker(TasksBuffer buffer) {
+		tasks = buffer;
 	}
 
-	@Override
 	public void run() {
-		try {
-			httpInput = new HttpRequestStream(clientSocket.getInputStream());
-			httpOutput = clientSocket.getOutputStream();
-		} catch (IOException e) {
-			// TODO: comment gérer cette exception??
-			System.err
-					.println("Impossible de récupérer les flux de la socket!");
-			e.printStackTrace();
-		}
-		
-		openedConnection =  true;
-
-		try {
-			while (openedConnection) {
-				try {
-					request = httpInput.readRequest();
-					response = site.respondTo(request);
-					response.writeTo(httpOutput);
-				} catch (IOException e) {
-					System.out.println("Interruption Thread: "+ Thread.currentThread().getName());
-					openedConnection =  false;
-				} catch (URISyntaxException e) {
-					System.err.println("Mauvaise URI pour accéder aux fichiers!");
-					e.printStackTrace();
-				}
-			}
-		} finally {
+		while (stayingAlive) {
 			try {
-				httpOutput.close();
-				clientSocket.close();
-			} catch (Exception e) {}
+				nbConsumers.acquire();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			Task currentWorker = tasks.retrieveTask();
+			nbConsumers.release();
+			currentWorker.run();
 		}
+	}
+	
+	public static void killThreads() {
+		stayingAlive = false;
 	}
 }

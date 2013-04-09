@@ -13,13 +13,13 @@ import lsr.concurrence.webserver.Configuration;
  *
  */
 
-public class TCPAcceptor extends Thread {
+public class TCPAcceptor_stage2 extends Thread {
 	public final int PORT = Configuration.config.getIntProperty("server.port", Configuration.DEFAULT_SERVER_PORT);
-	private static TCPAcceptor instance = null;
+	private static TCPAcceptor_stage2 instance = null;
 	private ServerSocket serverSocket = null;
 	private TasksBuffer tasks;
 	
-	private TCPAcceptor() {
+	private TCPAcceptor_stage2() {
 		try {
 			serverSocket = new ServerSocket(PORT);
 		} catch (IOException e) {
@@ -28,9 +28,9 @@ public class TCPAcceptor extends Thread {
 		tasks = new TasksBuffer();
 	}
 
-	public static TCPAcceptor getInstance() {
+	public static TCPAcceptor_stage2 getInstance() {
 		if (instance == null) {
-			instance = new TCPAcceptor();
+			instance = new TCPAcceptor_stage2();
 		}
 		return instance;
 	}
@@ -39,7 +39,7 @@ public class TCPAcceptor extends Thread {
 		while(true) {
 			try {
 				Socket clientSocket = serverSocket.accept();
-				tasks.addWorker(new Worker(clientSocket));
+				tasks.addTask(new ConnectionTask(clientSocket));
 			} catch (IOException e) {
 				System.out.println("Server crashed listening to port: " + PORT);
 			}
