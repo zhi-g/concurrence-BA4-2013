@@ -1,5 +1,5 @@
 package tcp;
-
+//TODO javadoc Rutz
 public class BlockingCounter {
 	
 	private int counter = 1;

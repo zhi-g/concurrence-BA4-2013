@@ -1,5 +1,5 @@
 package tcp;
-
+//TODO javadoc Gucevska
 import java.util.concurrent.Semaphore;
 
 import lsr.concurrence.webserver.Configuration;
@@ -31,7 +31,7 @@ public class TasksBuffer {
 	}
 
 	void addTask(Task task) {
-		System.out.println("addWorker:"+ Thread.currentThread().getName());
+//		System.out.println("addWorker:"+ Thread.currentThread().getName());
 		try {
 			fullBuffer.acquire();
 		} catch (InterruptedException e) {
@@ -43,13 +43,13 @@ public class TasksBuffer {
 	}
 
 	Task retrieveTask() {
-		System.out.println("retrieveWorker before acquire:"+ Thread.currentThread().getName());
+//		System.out.println("retrieveWorker before acquire:"+ Thread.currentThread().getName());
 		try {
 			emptyBuffer.acquire();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println("retrieveWorker after acquire:"+ Thread.currentThread().getName());
+//		System.out.println("retrieveWorker after acquire:"+ Thread.currentThread().getName());
 		Task task = buffer[output];
 		buffer[output] = null;
 		output = (output + 1)%BUFFER_SIZE;

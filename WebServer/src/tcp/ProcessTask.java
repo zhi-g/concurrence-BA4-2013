@@ -1,5 +1,5 @@
 package tcp;
-
+//TODO javadoc Rutz
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -11,34 +11,42 @@ import lsr.concurrence.webserver.StaticSite;
 
 public class ProcessTask extends Task {
 
-	private HttpResponse response;
-	private OutputStream httpOutput;
-	private StaticSite site;
-	private BlockingCounter counter;
-	private final int ID;
+    private HttpResponse response;
+    private OutputStream httpOutput;
+    private StaticSite site;
+    private BlockingCounter counter;
+    private final int ID;
 
-	public ProcessTask(HttpRequest request, Socket socket, int k, BlockingCounter counter) {
-		super.request = request;
-		super.clientSocket = socket;
-		ID = k;
-		this.counter = counter;
+    public ProcessTask(HttpRequest request, Socket socket, int k,
+	    BlockingCounter counter) {
+	super.request = request;
+	super.clientSocket = socket;
+	try {
+	    site = new StaticSite();
+	} catch (IOException e) {
+	    e.printStackTrace();
 	}
+	ID = k;
+	this.counter = counter;
+    }
 
-	@Override
-	public void run() {
-		try {
-			httpOutput = clientSocket.getOutputStream();
-			counter.await(ID);
-			response = site.respondTo(request);
-			response.writeTo(httpOutput);
-			counter.increment();
-		} catch (IOException e) {
-			// TODO: comment gérer cette exception??
-			System.err.println("Impossible de récupérer les flux de la socket!");
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
+    @Override
+    public void run() {
+	try {
+	    httpOutput = clientSocket.getOutputStream();
+	    counter.await(ID);
+	    response = site.respondTo(request);
+	    response.writeTo(httpOutput);
+	    System.out.println("Response" + ID + " sent for socket "+ clientSocket.toString());
+	    counter.increment();
+	} catch (IOException e) {
+	    // TODO: comment gérer cette exception??
+	    System.err
+		    .println("Impossible de récupérer les flux de la socket!");
+	    e.printStackTrace();
+	} catch (URISyntaxException e) {
+	    e.printStackTrace();
 	}
+    }
 
 }

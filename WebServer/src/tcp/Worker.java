@@ -1,5 +1,5 @@
 package tcp;
-
+//TODO javadoc Rutz
 import java.util.concurrent.Semaphore;
 
 public class Worker extends Thread {
