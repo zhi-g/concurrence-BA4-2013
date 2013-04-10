@@ -1,15 +1,16 @@
 package tcp;
+
 //TODO javadoc Rutz
 public class BlockingCounter {
-	
-	private int counter = 1;
-	
+
+	private int counter;
+
 	public BlockingCounter() {
-		
+		counter = 1;
 	}
-	
-	synchronized void await(int number){
-		while(counter != number) {
+
+	synchronized void await(int number) {
+		while (counter != number) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -17,10 +18,10 @@ public class BlockingCounter {
 			}
 		}
 	}
-	
-	synchronized void increment(){
+
+	synchronized void increment() {
 		counter++;
 		notifyAll();
 	}
-	
+
 }

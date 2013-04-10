@@ -1,4 +1,5 @@
 package tcp;
+
 //TODO javadoc Gucevska
 import java.io.IOException;
 import java.io.OutputStream;
@@ -37,8 +38,8 @@ public class ConnectionTask extends Task {
 			System.err.println("Impossible de récupérer les flux de la socket!");
 			e.printStackTrace();
 		}
-		
-		openedConnection =  true;
+
+		openedConnection = true;
 
 		try {
 			while (openedConnection) {
@@ -47,8 +48,8 @@ public class ConnectionTask extends Task {
 					response = site.respondTo(request);
 					response.writeTo(httpOutput);
 				} catch (IOException e) {
-					System.out.println("Interruption Thread: "+ Thread.currentThread().getName());
-					openedConnection =  false;
+//					System.out.println("Interruption Thread: " + Thread.currentThread().getName());
+					openedConnection = false;
 				} catch (URISyntaxException e) {
 					System.err.println("Mauvaise URI pour accéder aux fichiers!");
 					e.printStackTrace();
@@ -58,7 +59,8 @@ public class ConnectionTask extends Task {
 			try {
 				httpOutput.close();
 				clientSocket.close();
-			} catch (Exception e) {}
+			} catch (Exception e) {
+			}
 		}
 	}
 
