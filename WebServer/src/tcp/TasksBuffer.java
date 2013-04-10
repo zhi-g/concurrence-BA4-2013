@@ -13,6 +13,8 @@ public class TasksBuffer {
 	private Worker[] consumers;
 	private Semaphore emptyBuffer;
 	private Semaphore fullBuffer;
+	private Semaphore nbConsumers = new Semaphore(1);
+	
 
 	TasksBuffer() {
 		buffer = new Task[BUFFER_SIZE];
@@ -25,7 +27,7 @@ public class TasksBuffer {
 
 	private void startConsumers() {
 		for (int i = 0; i < THREAD_POOL_SIZE; ++i) {
-			consumers[i] = new Worker(this);
+			consumers[i] = new Worker(this, nbConsumers);
 			consumers[i].start();
 		}
 	}

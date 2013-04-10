@@ -23,12 +23,11 @@ public class ReadTask extends Task {
 
     @Override
     public void run() {
-	openedConnection = true;
+	openedConnection = false;
 	try {
 	    httpInput = new HttpRequestStream(clientSocket.getInputStream());
-	} catch (IOException e) {
-		openedConnection = false;
-	}
+	    openedConnection = true;
+	} catch (IOException e) {}
 
 	try {
 	    while (openedConnection) {
@@ -41,11 +40,9 @@ public class ReadTask extends Task {
 		    nbProducers.release();
 		} catch (IOException e) {
 		    openedConnection = false;
-		    e.printStackTrace();
 		} catch (InterruptedException e) {
 		    e.printStackTrace();
 		}
-
 	    }
 	} finally {
 	    try {

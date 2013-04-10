@@ -38,9 +38,11 @@ public class TCPAcceptor_stage3 extends Thread {
 
 	public void run() {
 		while (true) {
-			try {
+			try {	
 				Socket clientSocket = serverSocket.accept();
+//				System.out.println("After accepting: " + clientSocket.toString());
 				readTasks.addTask(new ReadTask(clientSocket));
+//				System.out.println("After adding ReadTask to buffer for socket: "+ clientSocket.toString());
 			} catch (IOException e) {
 				System.out.println("Server crashed listening to port: " + PORT);
 			}

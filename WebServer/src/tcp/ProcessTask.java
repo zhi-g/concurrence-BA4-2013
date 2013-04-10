@@ -37,7 +37,7 @@ public class ProcessTask extends Task {
 	    counter.await(ID);
 	    response = site.respondTo(request);
 	    response.writeTo(httpOutput);
-	    System.out.println("Response" + ID + " sent for socket "+ clientSocket.toString());
+//	    System.out.println("Response " + ID + " sent for socket "+ clientSocket.toString() + " in thread " + Thread.currentThread().getId());
 	    counter.increment();
 	} catch (IOException e) {
 	    
