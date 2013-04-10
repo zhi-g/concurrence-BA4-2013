@@ -5,7 +5,6 @@ import java.util.concurrent.Semaphore;
 public class Worker extends Thread {
 	private static boolean stayingAlive = true;
 	private TasksBuffer tasks;
-	private static Semaphore nbConsumers = new Semaphore(1);
 
 	public Worker(TasksBuffer buffer) {
 		tasks = buffer;
@@ -13,13 +12,14 @@ public class Worker extends Thread {
 
 	public void run() {
 		while (stayingAlive) {
-			try {
-				nbConsumers.acquire();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			Task currentWorker = tasks.retrieveTask();
-			nbConsumers.release();
+			// System.out.println("Worker "+ Thread.currentThread().toString() +
+			// " waits for a permit");
+			// System.out.println("Permit acquired for thread: " +
+			// Thread.currentThread().getId());
+				Task currentWorker = tasks.retrieveTask();
+				currentWorker.run();
+			// System.out.println("Task retrieved for thread: " +
+			// Thread.currentThread().getId());
 			currentWorker.run();
 		}
 	}

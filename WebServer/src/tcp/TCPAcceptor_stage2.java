@@ -10,7 +10,7 @@ import lsr.concurrence.webserver.Configuration;
  * @author Zhivka Gucevska, Valentin Rutz
  * 
  * 
- *
+ * 
  */
 
 public class TCPAcceptor_stage2 extends Thread {
@@ -45,5 +45,6 @@ public class TCPAcceptor_stage2 extends Thread {
 			}
 		}
     }
+	
 	
 }
