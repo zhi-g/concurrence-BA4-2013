@@ -1,6 +1,6 @@
 package tcp;
+
 //TODO javadoc Rutz
-import java.util.concurrent.Semaphore;
 
 public class Worker extends Thread {
 	private static boolean stayingAlive = true;
@@ -16,14 +16,17 @@ public class Worker extends Thread {
 			// " waits for a permit");
 			// System.out.println("Permit acquired for thread: " +
 			// Thread.currentThread().getId());
-				Task currentWorker = tasks.retrieveTask();
-				currentWorker.run();
+			Task currentWorker = tasks.retrieveTask();
+			currentWorker.run();
 			// System.out.println("Task retrieved for thread: " +
 			// Thread.currentThread().getId());
 			currentWorker.run();
+			// System.out.println("Task launched by thread: " +
+			// Thread.currentThread().getId());
+
 		}
 	}
-	
+
 	public static void killThreads() {
 		stayingAlive = false;
 	}

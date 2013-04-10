@@ -1,58 +1,50 @@
 package tcp;
+
 //TODO javadoc Rutz
 import java.io.IOException;
 import java.net.Socket;
-import java.util.concurrent.Semaphore;
 
 import lsr.concurrence.http.HttpRequestStream;
 
 public class ReadTask extends Task {
 
-    private boolean openedConnection;
-    private int k = 0;
-    private BlockingCounter counter;
-    private HttpRequestStream httpInput;
-    private TasksBuffer buffer;
-    private static Semaphore nbProducers = new Semaphore(1);
+	private boolean openedConnection;
+	private int k = 0;
+	private BlockingCounter counter;
+	private HttpRequestStream httpInput;
+	private TasksBuffer buffer;
 
-    public ReadTask(Socket clientSocket) {
-	super.clientSocket = clientSocket;
-	buffer = TCPAcceptor_stage3.getInstance().getProcessBuffer();
-	counter = new BlockingCounter();
-    }
-
-    @Override
-    public void run() {
-	openedConnection = true;
-	try {
-	    httpInput = new HttpRequestStream(clientSocket.getInputStream());
-	} catch (IOException e) {
-		openedConnection = false;
+	public ReadTask(Socket clientSocket) {
+		super.clientSocket = clientSocket;
+		buffer = TCPAcceptor_stage3.getInstance().getProcessBuffer();
+		counter = new BlockingCounter();
 	}
 
-	try {
-	    while (openedConnection) {
+	@Override
+	public void run() {
+		openedConnection = false;
 		try {
-		    request = httpInput.readRequest();
-		    k++;
-		    nbProducers.acquire();
-		    buffer.addTask(new ProcessTask(request, super.clientSocket,
-			    k, counter));
-		    nbProducers.release();
+			httpInput = new HttpRequestStream(clientSocket.getInputStream());
+			openedConnection = true;
 		} catch (IOException e) {
-		    openedConnection = false;
-		    e.printStackTrace();
-		} catch (InterruptedException e) {
-		    e.printStackTrace();
 		}
 
-	    }
-	} finally {
-	    try {
-		super.clientSocket.close();
-	    } catch (IOException e) {
-		e.printStackTrace();
-	    }
+		try {
+			while (openedConnection) {
+				try {
+					request = httpInput.readRequest();
+					k++;
+					buffer.addTask(new ProcessTask(request, super.clientSocket, k, counter));
+				} catch (IOException e) {
+					openedConnection = false;
+				}
+			}
+		} finally {
+			try {
+				super.clientSocket.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
-    }
 }

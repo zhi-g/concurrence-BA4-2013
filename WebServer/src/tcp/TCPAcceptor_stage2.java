@@ -1,4 +1,5 @@
 package tcp;
+
 //TODO javadoc Gucevska
 import java.io.IOException;
 import java.net.*;
@@ -14,11 +15,12 @@ import lsr.concurrence.webserver.Configuration;
  */
 
 public class TCPAcceptor_stage2 extends Thread {
-	public final int PORT = Configuration.config.getIntProperty("server.port", Configuration.DEFAULT_SERVER_PORT);
+	public final int PORT = Configuration.config.getIntProperty("server.port",
+			Configuration.DEFAULT_SERVER_PORT);
 	private static TCPAcceptor_stage2 instance = null;
 	private ServerSocket serverSocket = null;
 	private TasksBuffer tasks;
-	
+
 	private TCPAcceptor_stage2() {
 		try {
 			serverSocket = new ServerSocket(PORT);
@@ -34,9 +36,9 @@ public class TCPAcceptor_stage2 extends Thread {
 		}
 		return instance;
 	}
-	
+
 	public void run() {
-		while(true) {
+		while (true) {
 			try {
 				Socket clientSocket = serverSocket.accept();
 				tasks.addTask(new ConnectionTask(clientSocket));
@@ -44,7 +46,6 @@ public class TCPAcceptor_stage2 extends Thread {
 				System.out.println("Server crashed listening to port: " + PORT);
 			}
 		}
-    }
-	
-	
+	}
+
 }

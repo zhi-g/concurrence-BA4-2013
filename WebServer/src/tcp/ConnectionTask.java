@@ -54,9 +54,6 @@ public class ConnectionTask extends Task {
 			e.printStackTrace();
 			openedConnection =  true;
 		}
-		
-
-		openedConnection = true;
 
 		try {
 			while (openedConnection) {
@@ -78,7 +75,8 @@ public class ConnectionTask extends Task {
 			try {
 				httpOutput.close();
 				clientSocket.close();
-			} catch (Exception e) {}
+			} catch (Exception e) {
+			}
 		}
 	}
 
