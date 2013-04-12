@@ -20,9 +20,6 @@ public class Worker extends Thread {
 			currentWorker.run();
 			// System.out.println("Task retrieved for thread: " +
 			// Thread.currentThread().getId());
-			currentWorker.run();
-			// System.out.println("Task launched by thread: " +
-			// Thread.currentThread().getId());
 
 		}
 	}

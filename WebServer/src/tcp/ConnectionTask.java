@@ -52,7 +52,7 @@ public class ConnectionTask extends Task {
 			// problème avec la connection et on peut pas acceder au flux
 			System.err.println("Impossible de récupérer les flux de la socket!");
 			e.printStackTrace();
-			openedConnection =  true;
+			openedConnection =  false;
 		}
 
 		try {
