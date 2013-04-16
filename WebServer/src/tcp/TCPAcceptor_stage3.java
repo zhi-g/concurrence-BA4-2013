@@ -19,11 +19,12 @@ public class TCPAcceptor_stage3 extends Thread {
 	private TCPAcceptor_stage3() {
 		try {
 			serverSocket = new ServerSocket(PORT);
+			readTasks = new TasksBuffer();
+			processTasks = new TasksBuffer();
 		} catch (IOException e) {
 			System.out.println("Server could not connect to port: " + PORT);
+			System.exit(-1);
 		}
-		readTasks = new TasksBuffer();
-		processTasks = new TasksBuffer();
 	}
 
 	//Method to implement the Singleton pattern
