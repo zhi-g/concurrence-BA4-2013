@@ -10,13 +10,13 @@ import lsr.concurrence.webserver.Configuration;
  * 
  * @author Zhivka Gucevska, Valentin Rutz
  * 
- * 
- * 
  */
 
 public class TCPAcceptor_stage2 extends Thread {
+	//config
 	public final int PORT = Configuration.config.getIntProperty("server.port",
 			Configuration.DEFAULT_SERVER_PORT);
+	
 	private static TCPAcceptor_stage2 instance = null;
 	private ServerSocket serverSocket = null;
 	private TasksBuffer tasks;
