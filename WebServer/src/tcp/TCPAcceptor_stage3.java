@@ -1,6 +1,5 @@
 package tcp;
 
-//TODO javadoc Rutz
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -15,6 +14,8 @@ public class TCPAcceptor_stage3 extends Thread {
 	private TasksBuffer readTasks;
 	private TasksBuffer processTasks;
 
+	//Initializing the server with a Socket to listen to and two buffers: one to establish new connections (readTasks)
+	//and the other one to store the ready-to-be-processed tasks (processTasks)
 	private TCPAcceptor_stage3() {
 		try {
 			serverSocket = new ServerSocket(PORT);
@@ -25,28 +26,29 @@ public class TCPAcceptor_stage3 extends Thread {
 		processTasks = new TasksBuffer();
 	}
 
+	//Method to implement the Singleton pattern
 	public static TCPAcceptor_stage3 getInstance() {
 		if (instance == null) {
 			instance = new TCPAcceptor_stage3();
 		}
 		return instance;
 	}
-
+	
+	//Getter to give the ReadTasks the buffer to store the ProcessTasks
 	public TasksBuffer getProcessBuffer() {
 		return processTasks;
 	}
 
+	// Listening to the port and adding ReadTasks to open the connection in the readTasks buffer
+	// If IOException, then we stop listening to the port. That stops the server and so we kill the worker Threads.
 	public void run() {
 		while (true) {
 			try {
 				Socket clientSocket = serverSocket.accept();
-				// System.out.println("After accepting: " +
-				// clientSocket.toString());
 				readTasks.addTask(new ReadTask(clientSocket));
-				// System.out.println("After adding ReadTask to buffer for socket: "+
-				// clientSocket.toString());
 			} catch (IOException e) {
 				System.out.println("Server crashed listening to port: " + PORT);
+				Worker.killThreads();
 			}
 		}
 	}

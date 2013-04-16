@@ -1,7 +1,5 @@
 package tcp;
 
-//TODO javadoc Rutz
-
 public class Worker extends Thread {
 	private static boolean stayingAlive = true;
 	private TasksBuffer tasks;
@@ -11,19 +9,15 @@ public class Worker extends Thread {
 	}
 
 	public void run() {
+		//While we have a connection, we retrieve a Task from the taskBuffer and we run it.
 		while (stayingAlive) {
-			// System.out.println("Worker "+ Thread.currentThread().toString() +
-			// " waits for a permit");
-			// System.out.println("Permit acquired for thread: " +
-			// Thread.currentThread().getId());
 			Task currentWorker = tasks.retrieveTask();
 			currentWorker.run();
-			// System.out.println("Task retrieved for thread: " +
-			// Thread.currentThread().getId());
 
 		}
 	}
 
+	//Method to kill properly the worker Threads if need to be.
 	public static void killThreads() {
 		stayingAlive = false;
 	}
