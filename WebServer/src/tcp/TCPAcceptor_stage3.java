@@ -49,9 +49,9 @@ public class TCPAcceptor_stage3 extends Thread {
 				readTasks.addTask(new ReadTask(clientSocket));
 			} catch (IOException e) {
 				System.out.println("Server crashed listening to port: " + PORT);
-				Worker.killThreads();
+				readTasks.killWorkers();
+				processTasks.killWorkers();
 			}
 		}
 	}
-
 }

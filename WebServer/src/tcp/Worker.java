@@ -1,7 +1,7 @@
 package tcp;
 
 public class Worker extends Thread {
-	private static boolean stayingAlive = true;
+	private boolean stayingAlive = true;
 	private TasksBuffer tasks;
 
 	public Worker(TasksBuffer buffer) {
@@ -13,12 +13,11 @@ public class Worker extends Thread {
 		while (stayingAlive) {
 			Task currentWorker = tasks.retrieveTask();
 			currentWorker.run();
-
 		}
 	}
 
-	//Method to kill properly the worker Threads if need to be.
-	public static void killThreads() {
+	//Method to kill properly the worker if need to be.
+	public void killThread() {
 		stayingAlive = false;
 	}
 }

@@ -38,9 +38,11 @@ public class ConnectionTask extends Task {
 			site = new StaticSite(); // création de site qui va calculer la
 										// reponse
 		} catch (IOException e) {
-			// TODO: comment gerer cette exception
-			System.err.println("Impossible d'accéder aux fichiers du serveur");
-			e.printStackTrace();
+			//Si on ne peut pas se connecter au site, on ferme la connection avec le client car on ne peut pas créer les réponses.
+			System.err.println("Impossible de se connecter au serveur! \n Impossibilité de satisfaire les requêtes du client. \n On ferme la connection.");
+			try {
+				clientSocket.close();
+			} catch (IOException e1) {}
 		}
 	}
 
@@ -56,10 +58,6 @@ public class ConnectionTask extends Task {
 			httpOutput = clientSocket.getOutputStream();
 		} catch (IOException e) {
 			// problème avec la connection et on peut pas acceder au flux
-			// TODO: voir si necessaire printTrace
-			System.err
-					.println("Impossible de récupérer les flux de la socket!");
-			e.printStackTrace();
 			openedConnection = false; // on a pas reussit de recuperer le flux -
 										// la connection n'est pas initialisé
 										// correctement
@@ -77,12 +75,8 @@ public class ConnectionTask extends Task {
 					// fermée
 					openedConnection = false;
 				} catch (URISyntaxException e) {
-					// problème avec le fichier demander
-					// TODO: qu'est-ce qu'on doit envoyer comme reponse ou bien
-					// pas de reponse?
-					System.err
-							.println("Mauvaise URI pour accéder aux fichiers!");
-					e.printStackTrace();
+					// problème avec le fichier demandé, on ignore donc la requête
+					// sans fermer la connection pour lire la suivante
 				}
 			}
 		} finally {
@@ -90,8 +84,7 @@ public class ConnectionTask extends Task {
 			try {
 				httpOutput.close();
 				clientSocket.close();
-			} catch (Exception e) {
-			}
+			} catch (Exception e) {}
 		}
 	}
 

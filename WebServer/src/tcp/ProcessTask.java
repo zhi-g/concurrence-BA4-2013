@@ -29,7 +29,11 @@ public class ProcessTask extends Task {
 		try {
 			site = new StaticSite();
 		} catch (IOException e) {
-			e.printStackTrace();
+			//Si on ne peut pas se connecter au site, on ferme la connection avec le client car on ne peut pas créer les réponses.
+			System.err.println("Impossible de se connecter au serveur! \n Impossibilité de satisfaire les requêtes du client. \n On ferme la connection.");
+			try {
+				clientSocket.close();
+			} catch (IOException e1) {}
 		}
 		ID = k;
 		this.counter = counter;
@@ -37,7 +41,8 @@ public class ProcessTask extends Task {
 
 	// The run method get the outputStream, process the response to the request, wait for its turn,
 	//write it on the stream and increment the counter to notify the next Task that it can send its own response
-	//Handling the IOException isn't necessary because it means the connection has to be closed so we reach the end of the method
+	//Handling the IOException isn't necessary because it means the connection had a problem,
+	//so it is probably already closed so we reach the end of the method
 	@Override
 	public void run() {
 		try {
@@ -48,8 +53,8 @@ public class ProcessTask extends Task {
 			counter.increment();
 		} catch (IOException e) {
 		} catch (URISyntaxException e) {
-			e.printStackTrace();
+			// problème avec le fichier demandé, on ignore donc la requête
+			// sans fermer la connection pour lire la suivante
 		}
 	}
-
 }

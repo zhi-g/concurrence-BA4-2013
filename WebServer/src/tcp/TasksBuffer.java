@@ -62,10 +62,7 @@ public class TasksBuffer {
 			fullBuffer.acquire(); // bloque si le buffer est plein
 			nbUsers.acquire(); // bloque si déjà un Worker lit/écrit sur le
 								// buffer
-		} catch (InterruptedException e) {
-			// TODO: ??
-			e.printStackTrace();
-		}
+		} catch (InterruptedException e) {}
 		//ajouter Task
 		buffer[input] = task;
 		input = (input + 1) % BUFFER_SIZE;
@@ -82,9 +79,7 @@ public class TasksBuffer {
 			emptyBuffer.acquire(); // bloque si le buffer est vide
 			nbUsers.acquire();// bloque si déjà un Worker lit/écrit sur le
 								// buffer
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		} catch (InterruptedException e) {}
 		//retirer Taks 
 		Task task = buffer[output];
 		buffer[output] = null;
@@ -95,5 +90,10 @@ public class TasksBuffer {
 		return task;
 	}
 	
-	//TODO: methode qui arrete les threads proprement?
+	//Méthode pour terminer plus proprement les différents Workers
+	public void killWorkers() {
+		for (Worker w : users) {
+			w.killThread();
+		}
+	}
 }
