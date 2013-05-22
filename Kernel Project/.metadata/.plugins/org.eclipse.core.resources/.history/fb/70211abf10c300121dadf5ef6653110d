@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "fpga/system_m.h"
+#include "kernel.h"
+
+#define MAX_PROCESS 10
+#define MAX_LOCK 10
+#define MAX_COND 10
+
+typedef struct ProcessDescriptor_{
+    int priority;
+    Process p;
+    int next;
+} ProcessDescriptor;
+
+ProcessDescriptor readyList[MAX_PROCESS];
+unsigned int nextProcess = 0;
+
+typedef struct {
+	int state;
+	int waitingList;
+} LockDescriptor;
+
+LockDescriptor locks[MAX_LOCK];
+
+void creerProcessus(void (*f), int stackSize, int priority){
+	if (nbProcess >= MAX_PROCESS) {
+		printf("Error: max number of processes reached!\n");
+		exit(1);
+	}
+    Process p = NULL;
+    unsigned int* stackAddr = NULL;
+    stackAddr = calloc(stackSize, sizeof(int));
+    
+    if(stackAddr != NULL) {
+        p = newProcess(f, stackAddr, stackSize);
+        
+        if(p != NULL) {
+        	//TODO: rajout de p dans tab de process et dans la ready list
+            nbProcess++;
+        }
+    }
+}

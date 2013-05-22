@@ -13,7 +13,8 @@ public class TasksBuffer {
 	// parametres par default
 	final int THREAD_POOL_SIZE = Configuration.config.getIntProperty(
 			"thread_pool_size", 4);
-	final int BUFFER_SIZE = 50;
+	final int BUFFER_SIZE = Configuration.config.getIntProperty(
+			"buffer_size", 50);
 
 	// le buffer
 	private Task[] buffer;
@@ -45,10 +46,21 @@ public class TasksBuffer {
 		emptyBuffer.drainPermits();
 		startUsers();
 	}
-
+	/**
+	 * 
+	 * @param numberOfWorkers le nombre de threads qui vont executer les taches de ce buffer
+	 */
+	public TasksBuffer(int numberOfWorkers){
+		buffer = new Task[BUFFER_SIZE];
+		users = new Worker[numberOfWorkers];
+		emptyBuffer = new Semaphore(BUFFER_SIZE);
+		fullBuffer = new Semaphore(BUFFER_SIZE);
+		emptyBuffer.drainPermits();
+		startUsers();
+	}
 	// creation et lancement de threads Workers
 	private void startUsers() {
-		for (int i = 0; i < THREAD_POOL_SIZE; ++i) {
+		for (int i = 0; i < users.length; ++i) {
 			users[i] = new Worker(this);
 			users[i].start();
 		}

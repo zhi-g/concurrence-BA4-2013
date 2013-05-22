@@ -1,3 +1,7 @@
+Zhivka Gucevska 205008
+Valentin Rutz 203909
+
+
 Tout d'abord, veillez à bien ouvrir le projet en UTF-8.
 
 Ensuite, nous avons une class abstraite Task utilisée pour bien marquer le fait que les différentes tâches ConnectionTask, ProcessTask et ReadTask ont des propriétés similaires.
@@ -8,6 +12,9 @@ Dans le TaskBuffer:
 Nous avons choisi d'enlever toutes les permissions de la Sémaphore emptyBuffer car c'est il est beaucoup plus intuitif d'ajouter une permission quand on ajoute des Tasks dans le buffer.
 Nous avons de plus une Sémaphore nbUsers qui nous permet de nous assurer qu'un seul Worker ne puisse accéder en même temps à buffer.
 Nous avons fait attention au fait que l'on vérifie en premier que le nombre de messages dans buffer est satisfaisant avant de demander la permission pour modifier le buffer.
+Nous avons aussi ajouté un constructeur qui prend en argument un entier qui définit le nombre de Workers qui vont éxécuter les tâches du buffer.
+Cette option est utile pour le stage_3 si l'on veut un nombre différent de Workers pour les différents buffers.
+Ceci n'est pas implémenté dans le TCPAcceptor car nous avons fait comme demandé dans le projet et lu cette propriété dans le fichier server.properties.
 
 Nous avons utilisé les moniteurs Java plutôt que les conditions dans BlockingCounter tout simplement car nous les avons vus en cours et que nous sommes plus familiers avec.
 
