@@ -1,0 +1,351 @@
+what,kind,bundleId,bundleVersion,description,time
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.undo",1369322286111
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.undo",1369322286595
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369322292974
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369322298933
+error,log,,,"Error: IOException",1369322304303
+error,log,,,"Error: IOException",1369322304347
+error,log,,,"Error: IOException",1369322304362
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369322304362
+error,log,,,"Error: IOException",1369322308637
+error,log,,,"Error: IOException",1369322308715
+error,log,,,"Error: IOException",1369322308715
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369322308730
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369322315175
+error,log,,,"Error: IOException",1369322315189
+error,log,,,"Error: IOException",1369322315220
+error,log,,,"Error: IOException",1369322315220
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369322325611
+error,log,,,"Error: IOException",1369322325673
+error,log,,,"Error: IOException",1369322325723
+error,log,,,"Error: IOException",1369322325735
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369322348341
+error,log,,,"Error: IOException",1369322349745
+error,log,,,"Error: IOException",1369322349823
+error,log,,,"Error: IOException",1369322349823
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369322349838
+error,log,,,"Error: IOException",1369322358731
+error,log,,,"Error: IOException",1369322358763
+error,log,,,"Error: IOException",1369322358763
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369322358778
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369322407406
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369322421726
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369322534628
+error,log,,,"Could not write metadata for '/'.",1369322534661
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369322541777
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369322686328
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.cut",1369322695314
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1369322697093
+error,log,,,"Error: IOException",1369322700072
+error,log,,,"Error: IOException",1369322700122
+error,log,,,"Error: IOException",1369322700122
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369322700122
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369322733410
+error,log,,,"Error: IOException",1369322733410
+error,log,,,"Error: IOException",1369322733490
+error,log,,,"Error: IOException",1369322733490
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369322774427
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369322779947
+error,log,,,"Error: IOException",1369322779994
+error,log,,,"Error: IOException",1369322780025
+error,log,,,"Error: IOException",1369322780025
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369322782006
+error,log,,,"Error: IOException",1369322782646
+error,log,,,"Error: IOException",1369322782694
+error,log,,,"Error: IOException",1369322782694
+error,log,,,"Error: IOException",1369322791086
+error,log,,,"Error: IOException",1369322791133
+error,log,,,"Error: IOException",1369322791133
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369322791148
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1369322867732
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1369322869791
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369322871616
+error,log,,,"Error: IOException",1369322871632
+error,log,,,"Error: IOException",1369322871679
+error,log,,,"Error: IOException",1369322871679
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1369322888372
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1369322890213
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1369322903880
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369322906952
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369322946874
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369322954971
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369322959978
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369322992474
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369322997622
+error,log,,,"Error: IOException",1369322997639
+error,log,,,"Error: IOException",1369322997687
+error,log,,,"Error: IOException",1369322997687
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369323000087
+error,log,,,"Could not write metadata for '/'.",1369323000119
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369323001964
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369323221320
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1369323231741
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1369323234066
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369323258542
+error,log,,,"Error: IOException",1369323258651
+error,log,,,"Error: IOException",1369323258714
+error,log,,,"Error: IOException",1369323258714
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1369323366966
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1369323368668
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369323370118
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369323380258
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369323383020
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1369323389447
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1369323390867
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369323395016
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369323409728
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369323411397
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1369323419182
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1369323420648
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1369323422458
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369323423472
+error,log,,,"Error: IOException",1369323423503
+error,log,,,"Error: IOException",1369323423535
+error,log,,,"Error: IOException",1369323423550
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369323443316
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369323453534
+executed,command,org.eclipse.cdt.ui,5.3.2.201202111925,"org.eclipse.cdt.ui.edit.opendecl",1369323458370
+error,log,,,"Error: IOException",1369323480602
+error,log,,,"Error: IOException",1369323480649
+error,log,,,"Error: IOException",1369323480649
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369323480649
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369323502194
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369323512848
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369323515734
+error,log,,,"Error: IOException",1369323515734
+error,log,,,"Error: IOException",1369323515781
+error,log,,,"Error: IOException",1369323515781
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369323530554
+error,log,,,"Error: IOException",1369323530570
+error,log,,,"Error: IOException",1369323530617
+error,log,,,"Error: IOException",1369323530617
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369323535780
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369323536248
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369323558574
+error,log,,,"Could not write metadata for '/'.",1369323558651
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369323560211
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369323570616
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369323572021
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1369323576124
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1369323581287
+error,log,,,"Error: IOException",1369323593222
+error,log,,,"Error: IOException",1369323593268
+error,log,,,"Error: IOException",1369323593268
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369323593268
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369323605954
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369323616420
+error,log,,,"Error: IOException",1369323616451
+error,log,,,"Error: IOException",1369323616482
+error,log,,,"Error: IOException",1369323616482
+error,log,,,"Error: IOException",1369323678635
+error,log,,,"Error: IOException",1369323678681
+error,log,,,"Error: IOException",1369323678681
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369323678681
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369323893302
+error,log,,,"Could not write metadata for '/'.",1369323893346
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369324127840
+error,log,,,"Error: IOException",1369324129195
+error,log,,,"Error: IOException",1369324129195
+error,log,,,"Error: IOException",1369324129195
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369324129210
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369324429272
+error,log,,,"Could not write metadata for '/'.",1369324429319
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369324517571
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369324520754
+error,log,,,"Error: IOException",1369324520769
+error,log,,,"Error: IOException",1369324520785
+error,log,,,"Error: IOException",1369324520785
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369324524358
+error,log,,,"Error: IOException",1369324524358
+error,log,,,"Error: IOException",1369324524373
+error,log,,,"Error: IOException",1369324524373
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.cut",1369324600318
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1369324609459
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369324681051
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369324704997
+error,log,,,"Error: IOException",1369324705014
+error,log,,,"Error: IOException",1369324705059
+error,log,,,"Error: IOException",1369324705059
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369324706541
+error,log,,,"Error: IOException",1369324706855
+error,log,,,"Error: IOException",1369324706902
+error,log,,,"Error: IOException",1369324706915
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369324740473
+error,log,,,"Error: IOException",1369324740488
+error,log,,,"Error: IOException",1369324740520
+error,log,,,"Error: IOException",1369324740520
+error,log,,,"Error: IOException",1369324758413
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369324758445
+error,log,,,"Error: IOException",1369324758476
+error,log,,,"Error: IOException",1369324758476
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369324820831
+error,log,,,"Could not write metadata for '/'.",1369324820863
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369324838741
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369325209910
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369325227881
+error,log,,,"Error: IOException",1369325227899
+error,log,,,"Error: IOException",1369325227943
+error,log,,,"Error: IOException",1369325227943
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369325298443
+error,log,,,"Error: IOException",1369325298505
+error,log,,,"Error: IOException",1369325298551
+error,log,,,"Error: IOException",1369325298567
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.undo",1369325312468
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.undo",1369325312670
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369325339926
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369325341921
+error,log,,,"Error: IOException",1369325342342
+error,log,,,"Error: IOException",1369325342420
+error,log,,,"Error: IOException",1369325342420
+error,log,,,"Error: IOException",1369325346258
+error,log,,,"Error: IOException",1369325346305
+error,log,,,"Error: IOException",1369325346305
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369325346305
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369325460143
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1369325478254
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1369325480079
+error,log,,,"Error: IOException",1369325501873
+error,log,,,"Error: IOException",1369325501905
+error,log,,,"Error: IOException",1369325501905
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369325501921
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369325527912
+error,log,,,"Could not write metadata for '/'.",1369325527958
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369325529222
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369325601873
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369325673356
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369325679533
+error,log,,,"Error: IOException",1369325679580
+error,log,,,"Error: IOException",1369325679642
+error,log,,,"Error: IOException",1369325679642
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369325699973
+error,log,,,"Error: IOException",1369325700095
+error,log,,,"Error: IOException",1369325700157
+error,log,,,"Error: IOException",1369325700157
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369325727895
+error,log,,,"Error: IOException",1369325728004
+error,log,,,"Error: IOException",1369325728035
+error,log,,,"Error: IOException",1369325728051
+error,log,,,"Error: IOException",1369325730469
+error,log,,,"Error: IOException",1369325730532
+error,log,,,"Error: IOException",1369325730547
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369325730562
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.undo",1369325737910
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.undo",1369325738410
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.undo",1369325739065
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369325745383
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369325746600
+error,log,,,"Error: IOException",1369325746600
+error,log,,,"Error: IOException",1369325746651
+error,log,,,"Error: IOException",1369325746651
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325769939
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770438
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770468
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770500
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770546
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770578
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770625
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770656
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770703
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770735
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770780
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770828
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770858
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770890
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770922
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770952
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325770999
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771030
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771062
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771092
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771124
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771156
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771187
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771233
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771265
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771295
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771327
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771358
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771405
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771435
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771467
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771498
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771530
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771576
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771607
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771639
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771670
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325771889
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325772076
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325772450
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.delete",1369325772778
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369325821279
+error,log,,,"Error: IOException",1369325821342
+error,log,,,"Error: IOException",1369325821390
+error,log,,,"Error: IOException",1369325821390
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369325833402
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369325835960
+error,log,,,"Error: IOException",1369325836038
+error,log,,,"Error: IOException",1369325836085
+error,log,,,"Error: IOException",1369325836085
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369325844340
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.text.contentAssist.proposals",1369325852216
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369325853698
+error,log,,,"Error: IOException",1369325853713
+error,log,,,"Error: IOException",1369325853760
+error,log,,,"Error: IOException",1369325853760
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369325887598
+error,log,,,"Error: IOException",1369325887617
+error,log,,,"Error: IOException",1369325887617
+error,log,,,"Error: IOException",1369325887617
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369325979548
+error,log,,,"Could not write metadata for '/'.",1369325979578
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369325982589
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.copy",1369326007722
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1369326009657
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369326030171
+error,log,,,"Error: IOException",1369326030514
+error,log,,,"Error: IOException",1369326030561
+error,log,,,"Error: IOException",1369326030561
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369326095663
+error,log,,,"Error: IOException",1369326095678
+error,log,,,"Error: IOException",1369326095709
+error,log,,,"Error: IOException",1369326095725
+error,log,,,"Error: IOException",1369326103119
+error,log,,,"Error: IOException",1369326103167
+error,log,,,"Error: IOException",1369326103167
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369326103167
+activated,editor,org.eclipse.cdt.ui,5.3.2.201202111925,"org.eclipse.cdt.ui.editor.CEditor",1369326195929
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.v20110928-1505,"org.eclipse.ui.navigator.ProjectExplorer",1369326200967
+activated,view,org.eclipse.ui.console,3.5.100.v20111007_r372,"org.eclipse.ui.console.ConsoleView",1369326203713
+activated,view,org.eclipse.ui.navigator.resources,3.4.300.v20110928-1505,"org.eclipse.ui.navigator.ProjectExplorer",1369326203746
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369326204149
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369326206177
+error,log,,,"Error: IOException",1369326251387
+error,log,,,"Error: IOException",1369326251387
+error,log,,,"Error: IOException",1369326251465
+error,log,,,"Error: IOException",1369326251465
+activated,view,org.eclipse.ui.console,3.5.100.v20111007_r372,"org.eclipse.ui.console.ConsoleView",1369326253165
+activated,editor,org.eclipse.cdt.ui,5.3.2.201202111925,"org.eclipse.cdt.ui.editor.CEditor",1369326255663
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.cut",1369326270716
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.cut",1369326275100
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369326285209
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369326285864
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.edit.paste",1369326287206
+error,log,,,"Error: IOException",1369326296660
+error,log,,,"Error: IOException",1369326296707
+error,log,,,"Error: IOException",1369326296722
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369326296722
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369326310311
+error,log,,,"Error: IOException",1369326310685
+error,log,,,"Error: IOException",1369326310735
+error,log,,,"Error: IOException",1369326310735
+error,log,,,"Error: IOException",1369326318361
+error,log,,,"Error: IOException",1369326318439
+error,log,,,"Error: IOException",1369326318439
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369326318454
+executed,command,org.eclipse.ui,3.7.0.v20110928-1505,"org.eclipse.ui.file.save",1369326328813
+error,log,,,"Error: IOException",1369326329547
+error,log,,,"Error: IOException",1369326329608
+error,log,,,"Error: IOException",1369326329608
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1369326330201
+error,log,,,"Could not write metadata for '/'.",1369326330248

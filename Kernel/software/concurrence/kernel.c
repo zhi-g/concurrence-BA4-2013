@@ -7,15 +7,15 @@
 #define MAX_LOCK 10
 #define MAX_COND 10
 
+
 typedef struct {
     int priority;
     Process p;
-    int nextInLock;
-    int nextInCond;
+    int next;
 } ProcessDescriptor;
 
 ProcessDescriptor processes[MAX_PROCESS];
-unsigned int nextProcess = 0;
+unsigned int nbProcess = 0;
 int readyList = -1;
 
 typedef struct {
@@ -32,7 +32,7 @@ typedef struct {
 } LockDescriptor;
 
 LockDescriptor locks[MAX_LOCK];
-unsigned int nextLock = 0;
+unsigned int nbLocks = 0;
 
 /***********************************************************
  ***********************************************************
@@ -96,6 +96,8 @@ int head(int* list){
     }
 }
 
+
+
 void creerProcessus(void (*f), int stackSize, int priority){
 	if (nbProcess >= MAX_PROCESS) {
 		printf("Error: max number of processes reached!\n");
@@ -103,14 +105,95 @@ void creerProcessus(void (*f), int stackSize, int priority){
 	}
     Process p = NULL;
     unsigned int* stackAddr = NULL;
-    stackAddr = calloc(stackSize, sizeof(int));
+    stackAddr = malloc(stackSize);
     
     if(stackAddr != NULL) {
         p = newProcess(f, stackAddr, stackSize);
         
         if(p != NULL) {
-        	//TODO: rajout de p dans tab de process et dans la ready list
-            nbProcess++;
+        	processes[nbProcess].p = p;
+        	processes[nbProcess].priority = priority;
+        	processes[nbProcess].next = -1;
+        	addLast(&readyList, *p);
+        	nbProcess++;
         }
     }
+}
+
+void start(){
+    printf("Starting kernel...\n");
+    if (readyList == -1){
+        printf("Error: No process in the ready list!\n");
+        exit(1);
+    }
+    Process process = processes[head(&readyList)].p;
+    transfer(process);
+}
+
+int creerVerrou(){
+	if(nbLocks >= MAX_LOCK) {
+		printf("Error: max number of locks reached!\n");
+		exit(1);
+	}
+	locks[nbLocks].lockID = nbLocks;
+	locks[nbLocks].state = 1;
+	locks[nbLocks].waitingList = -1;
+	locks[nbLocks].nbCond = 0;
+	int n = nbLocks;
+	nbLocks++;
+	return n;
+}
+
+void verrouiller(int verrouID) {
+	if(locks[verrouID].state == 1) {
+		locks[verrouID].state = 0;
+	} else {
+		int prss = removeHead(&readyList);
+		addLast(&locks[verrouID].waitingList, prss);
+		transfer(processes[head(&readyList)].p);
+	}
+}
+
+void deverrouiller(int verrouID) {
+	locks[verrouID].state = 1;
+	if(locks[verrouID].waitingList != -1) {
+		int p = removeHead(&locks[verrouID].waitingList);
+		addLast(&readyList, p);
+	}
+}
+
+int creerCondition(int verrouID) {
+	if(locks[verrouID].nbCond >= MAX_COND) {
+		printf("Error: max number of conditions for lock %d reached!\n", verrouID);
+		exit(1);
+	}
+	LockDescriptor l = locks[verrouID];
+	l.conds[l.nbCond].condID = verrouID * MAX_COND + l.nbCond;
+	l.conds[l.nbCond].waitingList = -1;
+	int n = l.nbCond;
+	l.nbCond++;
+	return n;
+}
+
+void await(int conditionID) {
+	int p = removeHead(&readyList);
+	int lockID = conditionID / MAX_COND;
+	addLast(&locks[lockID].conds[conditionID % MAX_COND].waitingList, p);
+	transfer(processes[head(&readyList)].p);
+}
+
+void signal(int conditionID) {
+	int lockID = conditionID / MAX_COND;
+	if(locks[lockID].conds[conditionID % MAX_COND].waitingList != -1);
+	int p = removeHead(&locks[lockID].conds[conditionID % MAX_COND].waitingList);
+	if(p != -1) {
+		addLast(&readyList, p);
+	}
+}
+
+void signalAll(int conditionID) {
+	int lockID = conditionID / MAX_COND;
+	while(locks[lockID].conds[conditionID % MAX_COND].waitingList != -1) {
+		signal(conditionID);
+	}
 }

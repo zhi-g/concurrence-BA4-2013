@@ -5,43 +5,15 @@ make all
 Info: Building ../concurrence_bsp/
 make --no-print-directory -C ../concurrence_bsp/
 [BSP build complete]
-Info: Compiling applicationEtape1.c to obj/default/applicationEtape1.o
-nios2-elf-gcc -xc -MP -MMD -c -I../concurrence_bsp//HAL/inc -I../concurrence_bsp/ -I../concurrence_bsp//drivers/inc  -DSYSTEM_BUS_WIDTH=32 -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -EL -mno-hw-div -mhw-mul -mno-hw-mulx  -o obj/default/applicationEtape1.o applicationEtape1.c
-applicationEtape1.c:25: warning: missing braces around initializer
-applicationEtape1.c:25: warning: (near initialization for 'numCondition[0]')
-Info: Compiling fpga/interrupt.c to obj/default/fpga/interrupt.o
-nios2-elf-gcc -xc -MP -MMD -c -I../concurrence_bsp//HAL/inc -I../concurrence_bsp/ -I../concurrence_bsp//drivers/inc  -DSYSTEM_BUS_WIDTH=32 -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -EL -mno-hw-div -mhw-mul -mno-hw-mulx  -o obj/default/fpga/interrupt.o fpga/interrupt.c
-fpga/interrupt.c: In function 'init_button':
-fpga/interrupt.c:112: warning: implicit declaration of function 'alt_irq_register'
-Info: Compiling fpga/system_m.c to obj/default/fpga/system_m.o
-nios2-elf-gcc -xc -MP -MMD -c -I../concurrence_bsp//HAL/inc -I../concurrence_bsp/ -I../concurrence_bsp//drivers/inc  -DSYSTEM_BUS_WIDTH=32 -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -EL -mno-hw-div -mhw-mul -mno-hw-mulx  -o obj/default/fpga/system_m.o fpga/system_m.c
 Info: Compiling kernel.c to obj/default/kernel.o
 nios2-elf-gcc -xc -MP -MMD -c -I../concurrence_bsp//HAL/inc -I../concurrence_bsp/ -I../concurrence_bsp//drivers/inc  -DSYSTEM_BUS_WIDTH=32 -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -EL -mno-hw-div -mhw-mul -mno-hw-mulx  -o obj/default/kernel.o kernel.c
-Info: Assembling fpga/asm.s to obj/default/fpga/asm.o
-nios2-elf-gcc -MP -MMD -c -I../concurrence_bsp//HAL/inc -I../concurrence_bsp/ -I../concurrence_bsp//drivers/inc  -DSYSTEM_BUS_WIDTH=32 -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -EL -mno-hw-div -mhw-mul -mno-hw-mulx  -Wa,-I../concurrence_bsp//HAL/inc -Wa,-I../concurrence_bsp/ -Wa,-I../concurrence_bsp//drivers/inc -Wa,-gdwarf2 -o obj/default/fpga/asm.o fpga/asm.s
 Info: Linking concurrence.elf
 nios2-elf-g++  -T'../concurrence_bsp//linker.x' -msys-crt0='../concurrence_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../concurrence_bsp/   -Wl,-Map=concurrence.map   -O0 -g -Wall   -EL -mno-hw-div -mhw-mul -mno-hw-mulx  -o concurrence.elf obj/default/applicationEtape1.o obj/default/fpga/interrupt.o obj/default/fpga/system_m.o obj/default/kernel.o obj/default/fpga/asm.o -lm 
-obj/default/applicationEtape1.o: In function `deposer':
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:36: undefined reference to `verrouiller'
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:39: undefined reference to `await'
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:48: undefined reference to `deverrouiller'
-obj/default/applicationEtape1.o: In function `prelever':
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:54: undefined reference to `verrouiller'
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:58: undefined reference to `await'
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:67: undefined reference to `deverrouiller'
-obj/default/applicationEtape1.o: In function `main':
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:173: undefined reference to `creerVerrou'
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:174: undefined reference to `creerVerrou'
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:175: undefined reference to `creerVerrou'
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:177: undefined reference to `creerCondition'
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:178: undefined reference to `creerCondition'
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:179: undefined reference to `creerCondition'
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:180: undefined reference to `creerCondition'
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:181: undefined reference to `creerCondition'
-obj/default/applicationEtape1.o:Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:182: more undefined references to `creerCondition' follow
-obj/default/applicationEtape1.o: In function `main':
-Z:\Valentin\git\concurrence-BA4-2013\Kernel\software\concurrence/applicationEtape1.c:189: undefined reference to `start'
-collect2: ld returned 1 exit status
-make: *** [concurrence.elf] Error 1
+nios2-elf-insert concurrence.elf --thread_model hal --cpu_name nios2_qsys_0 --qsys true --simulation_enabled false --id -558907665 --sidp 0x2005108 --timestamp 1360593110 --stderr_dev jtag_uart_0 --stdin_dev jtag_uart_0 --stdout_dev jtag_uart_0 --sopc_system_name qsys_top --quartus_project_dir "Z:/Valentin/git/concurrence-BA4-2013/Kernel" --sopcinfo Z:/Valentin/git/concurrence-BA4-2013/Kernel/qsys_top_new.sopcinfo
+Info: (concurrence.elf) 64 KBytes program size (code + initialized data).
+Info:                   32697 KBytes free for stack + heap.
+Info: Creating concurrence.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source concurrence.elf >concurrence.objdump
+[concurrence build complete]
 
 **** Build Finished ****
