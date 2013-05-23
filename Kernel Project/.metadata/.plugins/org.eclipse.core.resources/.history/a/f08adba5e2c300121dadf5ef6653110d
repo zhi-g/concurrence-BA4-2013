@@ -1,0 +1,201 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "fpga/system_m.h"
+#include "kernel.h"
+
+#define MAX_PROCESS 10
+#define MAX_LOCK 10
+#define MAX_COND 10
+
+
+typedef struct {
+    int priority;
+    Process p;
+    int next;
+} ProcessDescriptor;
+
+ProcessDescriptor processes[MAX_PROCESS];
+unsigned int nbProcess = 0;
+int readyList = -1;
+
+typedef struct {
+	int condID;
+	int waitingList;
+} ConditionDescriptor;
+
+typedef struct {
+	int state; // 0 => closed and 1 => open
+	int waitingList;
+	int lockID;
+	ConditionDescriptor conds[MAX_COND];
+	unsigned int nbCond;
+	int lockingPrss;
+} LockDescriptor;
+
+LockDescriptor locks[MAX_LOCK];
+unsigned int nbLocks = 0;
+
+/***********************************************************
+ ***********************************************************
+            Utility functions for list manipulation
+************************************************************
+* **********************************************************/
+
+// add element to the tail of the list
+void addLast(int* list, int processId) {
+
+    if (*list == -1){
+        // list is empty
+        *list = processId;
+    }
+    else {
+        int temp = *list;
+		while (processes[temp].next != -1  || processes[processes[temp].next].priority >= processes[processId].priority){
+			temp = processes[temp].next;
+		}
+		int p = processes[temp].next;
+		processes[temp].next = processId;
+		processes[processId].next = p;
+    }
+
+}
+
+// add element to the head of list
+void addFirst(int* list, int processId){
+
+    if (*list == -1){
+        *list = processId;
+    }
+    else {
+        processes[processId].next = *list;
+        *list = processId;
+    }
+}
+
+// remove element that is head of the list
+int removeHead(int* list){
+    if (*list == -1){
+        printf("List is empty!");
+        return(-1);
+    }
+    else {
+        int head = *list;
+        int next = processes[*list].next;
+        processes[*list].next = -1;
+        *list = next;
+        return head;
+    }
+}
+
+// returns head of the list
+int head(int* list){
+    if (*list == -1){
+        printf("List is empty!\n");
+        return(-1);
+    }
+    else {
+        return *list;
+    }
+}
+
+
+
+void creerProcessus(void (*f), int stackSize, int priority){
+	if (nbProcess >= MAX_PROCESS) {
+		printf("Error: max number of processes reached!\n");
+		exit(1);
+	}
+    Process p = NULL;
+    unsigned int* stackAddr = NULL;
+    stackAddr = malloc(stackSize);
+    
+    if(stackAddr != NULL) {
+        p = newProcess(f, stackAddr, stackSize);
+        
+        if(p != NULL) {
+        	processes[nbProcess].p = p;
+        	processes[nbProcess].priority = priority;
+        	processes[nbProcess].next = -1;
+        	addLast(&readyList, *p);
+        	nbProcess++;
+        }
+    }
+}
+
+void start(){
+    printf("Starting kernel...\n");
+    if (readyList == -1){
+        printf("Error: No process in the ready list!\n");
+        exit(1);
+    }
+    Process process = processes[head(&readyList)].p;
+    transfer(process);
+}
+
+int creerVerrou(){
+	if(nbLocks >= MAX_LOCK) {
+		printf("Error: max number of locks reached!\n");
+		exit(1);
+	}
+	locks[nbLocks].lockID = nbLocks;
+	locks[nbLocks].state = 1;
+	locks[nbLocks].waitingList = -1;
+	locks[nbLocks].nbCond = 0;
+	int n = nbLocks;
+	nbLocks++;
+	return n;
+}
+
+void verrouiller(int verrouID) {
+	if(locks[verrouID].state == 1 || locks[verrouID].lockingPrss == head(&readyList)) {
+		locks[verrouID].state = 0;
+		locks[verrouID].lockingPrss = head(&readyList);
+	} else {
+		int prss = removeHead(&readyList);
+		addLast(&locks[verrouID].waitingList, prss);
+		transfer(processes[head(&readyList)].p);
+	}
+}
+
+void deverrouiller(int verrouID) {
+	locks[verrouID].state = 1;
+	if(locks[verrouID].waitingList != -1) {
+		int p = removeHead(&locks[verrouID].waitingList);
+		addLast(&readyList, p);
+	}
+}
+
+int creerCondition(int verrouID) {
+	if(locks[verrouID].nbCond >= MAX_COND) {
+		printf("Error: max number of conditions for lock %d reached!\n", verrouID);
+		exit(1);
+	}
+	LockDescriptor l = locks[verrouID];
+	l.conds[l.nbCond].condID = verrouID * MAX_COND + l.nbCond;
+	l.conds[l.nbCond].waitingList = -1;
+	int n = l.nbCond;
+	l.nbCond++;
+	return n;
+}
+
+void await(int conditionID) {
+	int p = removeHead(&readyList);
+	int lockID = conditionID / MAX_COND;
+	addLast(&locks[lockID].conds[conditionID % MAX_COND].waitingList, p);
+	transfer(processes[head(&readyList)].p);
+}
+
+void signal(int conditionID) {
+	int lockID = conditionID / MAX_COND;
+	int p = removeHead(&locks[lockID].conds[conditionID % MAX_COND].waitingList);
+	if(p != -1) {
+		addLast(&readyList, p);
+	}
+}
+
+void signalAll(int conditionID) {
+	int lockID = conditionID / MAX_COND;
+	while(locks[lockID].conds[conditionID % MAX_COND].waitingList != -1) {
+		signal(conditionID);
+	}
+}

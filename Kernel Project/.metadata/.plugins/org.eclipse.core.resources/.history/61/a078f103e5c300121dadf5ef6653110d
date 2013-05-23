@@ -1,0 +1,26 @@
+/*
+ * ex2.c
+ *
+ *  Created on: 23 May 2013
+ *      Author: Valentin Rutz
+ */
+
+#include "system.h"
+#include "altera_avalon_pio_regs.h"
+#include <stdio.h>
+int main() {
+	int delay = 100000;
+	int i;
+	while (1) {
+		IOWR_ALTERA_AVALON_PIO_DATA(LED_0_BASE, 1); //allume led 0
+		i = 0;
+		while (i < delay) {
+			i++;
+		} //delai IOWR_ALTERA_AVALON_PIO_DATA(LED_0_BASE,0);
+		IOWR_ALTERA_AVALON_PIO_DATA(LED_0_BASE, 0); //eteint led 0
+		i = 0;
+		while (i < delay) {
+			i++;
+		} //delai
+	}
+}

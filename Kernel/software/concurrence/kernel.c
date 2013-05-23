@@ -29,6 +29,7 @@ typedef struct {
 	int lockID;
 	ConditionDescriptor conds[MAX_COND];
 	unsigned int nbCond;
+	int lockingPrss;
 } LockDescriptor;
 
 LockDescriptor locks[MAX_LOCK];
@@ -49,11 +50,12 @@ void addLast(int* list, int processId) {
     }
     else {
         int temp = *list;
-        while (processes[temp].next != -1){
-            temp = processes[temp].next;
-        }
-        processes[temp].next = processId;
-        processes[processId].next = -1;
+		while (processes[temp].next != -1  || processes[processes[temp].next].priority >= processes[processId].priority){
+			temp = processes[temp].next;
+		}
+		int p = processes[temp].next;
+		processes[temp].next = processId;
+		processes[processId].next = p;
     }
 
 }
@@ -145,8 +147,9 @@ int creerVerrou(){
 }
 
 void verrouiller(int verrouID) {
-	if(locks[verrouID].state == 1) {
+	if(locks[verrouID].state == 1 || locks[verrouID].lockingPrss == head(&readyList)) {
 		locks[verrouID].state = 0;
+		locks[verrouID].lockingPrss = head(&readyList);
 	} else {
 		int prss = removeHead(&readyList);
 		addLast(&locks[verrouID].waitingList, prss);
@@ -159,6 +162,7 @@ void deverrouiller(int verrouID) {
 	if(locks[verrouID].waitingList != -1) {
 		int p = removeHead(&locks[verrouID].waitingList);
 		addLast(&readyList, p);
+		transfert(processes[head(&readyList)]);
 	}
 }
 
@@ -184,7 +188,6 @@ void await(int conditionID) {
 
 void signal(int conditionID) {
 	int lockID = conditionID / MAX_COND;
-	if(locks[lockID].conds[conditionID % MAX_COND].waitingList != -1);
 	int p = removeHead(&locks[lockID].conds[conditionID % MAX_COND].waitingList);
 	if(p != -1) {
 		addLast(&readyList, p);
