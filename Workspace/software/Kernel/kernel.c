@@ -178,7 +178,7 @@ void start() {
 		printf("Error: No process in the ready list!\n");
 		exit(1);
 	}
-	Process process = processes[head(&readyList)].p;
+	Process process = processes[priorityHead(&readyList)].p;
 	transfer(process);
 }
 
@@ -203,14 +203,14 @@ void verrouiller(int verrouID) {
 	if (locks[verrouID].state == 1
 	/*|| locks[verrouID].lockingPrss == head(&readyList)*/) {
 		locks[verrouID].state = 0;
-		locks[verrouID].lockingPrss = head(&readyList);
+		locks[verrouID].lockingPrss = priorityHead(&readyList);
 	} else {
-		int prss = removeHead(&readyList);
+		int prss = removePriorityHead(&readyList);
 		addLast(&locks[verrouID].waitingList, prss);
 		if (processes[prss].priority < 2) {
 			processes[prss].priority = 3;
 		}
-		transfer(processes[head(&readyList)].p);
+		transfer(processes[priorityHead(&readyList)].p);
 
 	}
 }
@@ -225,6 +225,7 @@ void deverrouiller(int verrouID) {
 				processes[p].priority = 1;
 			}
 			addLast(&readyList, p);
+			//transfer(processes[priorityHead(&readyList)].p);
 		}
 	//}
 
@@ -248,10 +249,10 @@ void await(int conditionID) {
 	//printf("Waiting for condition %d\n", conditionID % MAX_COND);
 	int lockID = conditionID / MAX_COND;
 	//if (locks[lockID].lockingPrss == head(&readyList)) {
-	int p = removeHead(&readyList);
+	int p = removePriorityHead(&readyList);
 	addLast(&locks[lockID].conds[conditionID % MAX_COND].waitingList, p);
 	deverrouiller(lockID);
-	transfer(processes[head(&readyList)].p);
+	transfer(processes[priorityHead(&readyList)].p);
 	verrouiller(lockID);
 	//}
 }
@@ -263,6 +264,8 @@ void signal(int conditionID) {
 			&locks[lockID].conds[conditionID % MAX_COND].waitingList);
 	if (p != -1) {
 		addLast(&readyList, p);
+		transfer(processes[priorityHead(&readyList)].p);
+
 
 	}
 
