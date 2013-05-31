@@ -29,7 +29,7 @@ typedef struct {
 	ConditionDescriptor conds[MAX_COND];
 	unsigned int nbCond;
 	int lockingPrss;
-	int conditionsSatisfied;
+	int nestingDepth;
 } LockDescriptor;
 
 LockDescriptor locks[MAX_LOCK];
@@ -52,27 +52,6 @@ void addFirst(int* list, int processId) {
 }
 
 // add element to the tail of the list
-/*
- void addLast(int* list, int processId) {
- if (*list == -1) {
- *list = processId;
- } else {
- int temp = *list;
- if (processes[temp].priority < processes[processId].priority) {
- addFirst(list, processId);
- } else {
- while (processes[temp].next != -1
- && processes[processes[temp].next].priority
- >= processes[processId].priority) {
- temp = processes[temp].next;
- }
- int prss = processes[temp].next;
- processes[temp].next = processId;
- processes[processId].next = prss;
- }
- }
-
- }*/
 void addLast(int* list, int processId) {
 	//printf("enter: add last\n");
 	if (*list == -1) {
@@ -195,17 +174,23 @@ int creerVerrou() {
 	locks[nbLocks].waitingList = -1;
 	locks[nbLocks].nbCond = 0;
 	locks[nbLocks].lockingPrss = -1;
-	locks[nbLocks].conditionsSatisfied = -1;
+	locks[nbLocks].nestingDepth = 0;
 
 	int n = nbLocks;
-	//printf("Lock avec ID %d cree \n", nbLocks);
 	nbLocks++;
 	return n;
 }
 
 void verrouiller(int verrouID) {
-	if (locks[verrouID].state == 1) {
+	if (locks[verrouID].state == 1
+			|| locks[verrouID].lockingPrss == priorityHead(&readyList)) {
 		locks[verrouID].state = 0;
+		/*if(locks[verrouID].lockingPrss == priorityHead(&readyList)){
+		 locks[verrouID].nestingDepth++;
+		 }else{
+		 locks[verrouID].nestingDepth=1;
+		 }*/
+		locks[verrouID].nestingDepth++;
 		locks[verrouID].lockingPrss = priorityHead(&readyList);
 	} else {
 		int prss = removePriorityHead(&readyList);
@@ -214,38 +199,31 @@ void verrouiller(int verrouID) {
 			processes[prss].priority = 3;
 		}
 		transfer(processes[priorityHead(&readyList)].p);
-
 	}
 }
 
 void deverrouiller(int verrouID) {
-	//if (locks[verrouID].lockingPrss == head(&readyList)) {
-	locks[verrouID].state = 1;
-	if (processes[locks[verrouID].lockingPrss].priority == 3) {
-		processes[locks[verrouID].lockingPrss].priority = 1;
-	}
-	int tmp = locks[verrouID].lockingPrss;
-	locks[verrouID].lockingPrss = -1;
-	/*if (locks[verrouID].conditionsSatisfied != -1) {
-	 int p = removeHead(&locks[verrouID].conditionsSatisfied);
-	 addLast(&readyList, p);
-	 locks[verrouID].state = 0;
-
-	 } else*/
-	if (locks[verrouID].waitingList != -1) {
-		int p = removeHead(&locks[verrouID].waitingList);
-		addLast(&readyList, p);
-		locks[verrouID].lockingPrss = p;
-		locks[verrouID].state = 0;
-
-		if (processes[p].priority - 1 >= processes[tmp].priority) {
-			transfer(processes[priorityHead(&readyList)].p);
+	if (locks[verrouID].nestingDepth > 0) {
+		locks[verrouID].state = 1;
+		if (processes[locks[verrouID].lockingPrss].priority == 3) {
+			processes[locks[verrouID].lockingPrss].priority = 1;
 		}
+		int tmp = locks[verrouID].lockingPrss;
+		locks[verrouID].lockingPrss = -1;
+		locks[verrouID].nestingDepth--;
+		if (locks[verrouID].nestingDepth == 0
+				&& locks[verrouID].waitingList != -1) {
+			int p = removeHead(&locks[verrouID].waitingList);
+			addLast(&readyList, p);
+			locks[verrouID].lockingPrss = p;
+			locks[verrouID].state = 0;
 
+			if (processes[p].priority - 1 >= processes[tmp].priority) {
+				transfer(processes[priorityHead(&readyList)].p);
+			}
+
+		}
 	}
-
-	//}
-
 }
 
 int creerCondition(int verrouID) {
