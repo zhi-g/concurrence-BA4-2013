@@ -121,7 +121,7 @@ int priorityHead(int* list) {
 		return (-1);
 	} else {
 		int temp = *list;
-		while (processes[temp].next != -1 && processes[temp].priority != 2) {
+		while (processes[temp].next != -1 && processes[temp].priority < 2) {
 			temp = processes[temp].next;
 		}
 
@@ -135,13 +135,13 @@ int removePriorityHead(int* list) {
 		return (-1);
 	} else {
 		int temp = *list;
-		int previous =-1;
-		while (processes[temp].next != -1 && processes[temp].priority != 2) {
+		int previous = -1;
+		while (processes[temp].next != -1 && processes[temp].priority < 2) {
 			previous = temp;
 			temp = processes[temp].next;
 		}
-		if(previous == -1){
-			*list=processes[temp].next;
+		if (previous == -1) {
+			*list = processes[temp].next;
 		} else {
 			processes[previous].next = processes[temp].next;
 		}
@@ -192,6 +192,7 @@ int creerVerrou() {
 	locks[nbLocks].waitingList = -1;
 	locks[nbLocks].nbCond = 0;
 	locks[nbLocks].lockingPrss = -1;
+
 	int n = nbLocks;
 	//printf("Lock avec ID %d cree \n", nbLocks);
 	nbLocks++;
@@ -200,32 +201,32 @@ int creerVerrou() {
 
 void verrouiller(int verrouID) {
 	if (locks[verrouID].state == 1
-			|| locks[verrouID].lockingPrss == head(&readyList)) {
+	/*|| locks[verrouID].lockingPrss == head(&readyList)*/) {
 		locks[verrouID].state = 0;
 		locks[verrouID].lockingPrss = head(&readyList);
 	} else {
 		int prss = removeHead(&readyList);
 		addLast(&locks[verrouID].waitingList, prss);
+		if (processes[prss].priority < 2) {
+			processes[prss].priority = 3;
+		}
 		transfer(processes[head(&readyList)].p);
+
 	}
 }
 
 void deverrouiller(int verrouID) {
-	//printf("Verrou %d deverouillé\n", verrouID);
-	if (locks[verrouID].lockingPrss == head(&readyList)) {
+	//if (locks[verrouID].lockingPrss == head(&readyList)) {
 		locks[verrouID].state = 1;
 		locks[verrouID].lockingPrss = -1;
 		if (locks[verrouID].waitingList != -1) {
 			int p = removeHead(&locks[verrouID].waitingList);
-			//printf("Processus %d ajouté à la readyList\n", p);
+			if (processes[p].priority == 3) {
+				processes[p].priority = 1;
+			}
 			addLast(&readyList, p);
-			/*if (processes[locks[verrouID].lockingPrss].priority
-			 < processes[p].priority) {
-			 addLast(&readyList, removeHead(&readyList));
-			 transfer(processes[head(&readyList)].p);
-			 }*/
 		}
-	}
+	//}
 
 }
 
@@ -239,7 +240,6 @@ int creerCondition(int verrouID) {
 			+ locks[verrouID].nbCond; //expliquer
 	locks[verrouID].conds[locks[verrouID].nbCond].waitingList = -1;
 	locks[verrouID].nbCond++;
-	//printf("Condition %d créé \n", locks[verrouID].conds[locks[verrouID].nbCond-1].condID);
 	return locks[verrouID].conds[locks[verrouID].nbCond - 1].condID;
 }
 
@@ -247,38 +247,34 @@ int creerCondition(int verrouID) {
 void await(int conditionID) {
 	//printf("Waiting for condition %d\n", conditionID % MAX_COND);
 	int lockID = conditionID / MAX_COND;
-	if (locks[lockID].lockingPrss == head(&readyList)) {
-		int p = removeHead(&readyList);
-		addLast(&locks[lockID].conds[conditionID % MAX_COND].waitingList, p);
-		deverrouiller(lockID);
-		transfer(processes[head(&readyList)].p);
-		verrouiller(lockID);
-	}
+	//if (locks[lockID].lockingPrss == head(&readyList)) {
+	int p = removeHead(&readyList);
+	addLast(&locks[lockID].conds[conditionID % MAX_COND].waitingList, p);
+	deverrouiller(lockID);
+	transfer(processes[head(&readyList)].p);
+	verrouiller(lockID);
+	//}
 }
 
 void signal(int conditionID) {
 	int lockID = conditionID / MAX_COND;
-	if (locks[lockID].lockingPrss == head(&readyList)) {
-		int p = removeHead(
-				&locks[lockID].conds[conditionID % MAX_COND].waitingList);
-		if (p != -1) {
-			addLast(&readyList, p);
-			/*if (processes[p].priority
-			 > processes[locks[lockID].lockingPrss].priority) {
-			 addLast(&readyList, removeHead(&readyList));
-			 transfer(processes[head(&readyList)].p);
-			 }*/
-		}
+	//if (locks[lockID].lockingPrss == head(&readyList)) {
+	int p = removeHead(
+			&locks[lockID].conds[conditionID % MAX_COND].waitingList);
+	if (p != -1) {
+		addLast(&readyList, p);
 
 	}
+
+	//}
 
 }
 
 void signalAll(int conditionID) {
 	int lockID = conditionID / MAX_COND;
-	if (locks[lockID].lockingPrss == head(&readyList)) {
-		while (locks[lockID].conds[conditionID % MAX_COND].waitingList != -1) {
-			signal(conditionID);
-		}
+	//if (locks[lockID].lockingPrss == head(&readyList)) {
+	while (locks[lockID].conds[conditionID % MAX_COND].waitingList != -1) {
+		signal(conditionID);
+		//}
 	}
 }
