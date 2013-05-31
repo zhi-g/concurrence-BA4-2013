@@ -3,9 +3,9 @@
 #include "system_m.h"
 #include "kernel.h"
 
-#define MAX_PROCESS 10
-#define MAX_LOCK 10
-#define MAX_COND 10
+#define MAX_PROCESS 4
+#define MAX_LOCK 3
+#define MAX_COND 2
 
 typedef struct {
 	int priority;
@@ -29,6 +29,7 @@ typedef struct {
 	ConditionDescriptor conds[MAX_COND];
 	unsigned int nbCond;
 	int lockingPrss;
+	int conditionsSatisfied;
 } LockDescriptor;
 
 LockDescriptor locks[MAX_LOCK];
@@ -141,10 +142,12 @@ int removePriorityHead(int* list) {
 			temp = processes[temp].next;
 		}
 		if (previous == -1) {
+
 			*list = processes[temp].next;
 		} else {
 			processes[previous].next = processes[temp].next;
 		}
+		processes[temp].next = -1;
 		return temp;
 	}
 }
@@ -192,6 +195,7 @@ int creerVerrou() {
 	locks[nbLocks].waitingList = -1;
 	locks[nbLocks].nbCond = 0;
 	locks[nbLocks].lockingPrss = -1;
+	locks[nbLocks].conditionsSatisfied = -1;
 
 	int n = nbLocks;
 	//printf("Lock avec ID %d cree \n", nbLocks);
@@ -200,8 +204,7 @@ int creerVerrou() {
 }
 
 void verrouiller(int verrouID) {
-	if (locks[verrouID].state == 1
-	/*|| locks[verrouID].lockingPrss == head(&readyList)*/) {
+	if (locks[verrouID].state == 1) {
 		locks[verrouID].state = 0;
 		locks[verrouID].lockingPrss = priorityHead(&readyList);
 	} else {
@@ -217,16 +220,30 @@ void verrouiller(int verrouID) {
 
 void deverrouiller(int verrouID) {
 	//if (locks[verrouID].lockingPrss == head(&readyList)) {
-		locks[verrouID].state = 1;
-		locks[verrouID].lockingPrss = -1;
-		if (locks[verrouID].waitingList != -1) {
-			int p = removeHead(&locks[verrouID].waitingList);
-			if (processes[p].priority == 3) {
-				processes[p].priority = 1;
-			}
-			addLast(&readyList, p);
-			//transfer(processes[priorityHead(&readyList)].p);
+	locks[verrouID].state = 1;
+	if (processes[locks[verrouID].lockingPrss].priority == 3) {
+		processes[locks[verrouID].lockingPrss].priority = 1;
+	}
+	int tmp = locks[verrouID].lockingPrss;
+	locks[verrouID].lockingPrss = -1;
+	/*if (locks[verrouID].conditionsSatisfied != -1) {
+	 int p = removeHead(&locks[verrouID].conditionsSatisfied);
+	 addLast(&readyList, p);
+	 locks[verrouID].state = 0;
+
+	 } else*/
+	if (locks[verrouID].waitingList != -1) {
+		int p = removeHead(&locks[verrouID].waitingList);
+		addLast(&readyList, p);
+		locks[verrouID].lockingPrss = p;
+		locks[verrouID].state = 0;
+
+		if (processes[p].priority - 1 >= processes[tmp].priority) {
+			transfer(processes[priorityHead(&readyList)].p);
 		}
+
+	}
+
 	//}
 
 }
@@ -246,38 +263,28 @@ int creerCondition(int verrouID) {
 
 //
 void await(int conditionID) {
-	//printf("Waiting for condition %d\n", conditionID % MAX_COND);
 	int lockID = conditionID / MAX_COND;
-	//if (locks[lockID].lockingPrss == head(&readyList)) {
 	int p = removePriorityHead(&readyList);
-	addLast(&locks[lockID].conds[conditionID % MAX_COND].waitingList, p);
+	addLast(&(locks[lockID].conds[conditionID % MAX_COND].waitingList), p);
 	deverrouiller(lockID);
 	transfer(processes[priorityHead(&readyList)].p);
-	verrouiller(lockID);
-	//}
+
 }
 
 void signal(int conditionID) {
 	int lockID = conditionID / MAX_COND;
-	//if (locks[lockID].lockingPrss == head(&readyList)) {
 	int p = removeHead(
 			&locks[lockID].conds[conditionID % MAX_COND].waitingList);
 	if (p != -1) {
-		addLast(&readyList, p);
-		transfer(processes[priorityHead(&readyList)].p);
-
-
+		addFirst(&locks[lockID].waitingList, p);
 	}
-
-	//}
 
 }
 
 void signalAll(int conditionID) {
 	int lockID = conditionID / MAX_COND;
-	//if (locks[lockID].lockingPrss == head(&readyList)) {
 	while (locks[lockID].conds[conditionID % MAX_COND].waitingList != -1) {
 		signal(conditionID);
-		//}
+
 	}
 }
